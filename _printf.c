@@ -7,12 +7,12 @@ void print_Buffer(char buffer[], int *buff_Ind);
  * @format: contains format specifiers
  * Return: Returns number of characters printed
  */
-int _printf(const char *format, ...);
+int _printf(const char *format, ...)
 {
 	va_list args;
 	int printed_Chars = 0, flags, width, precision, size;
 	int buff_Ind = 0, printed;
-	char buffer[BUFF_SIZE];
+	char buffer[BUFSIZ];
 
 	if (format == NULL)
 		return (-1);
@@ -23,7 +23,7 @@ int _printf(const char *format, ...);
 		if (*format != '%')
 		{
 			buffer[buff_Ind++] = *format;
-			if (buff_Ind == BUFF_SIZE)
+			if (buff_Ind == BUFSIZ)
 				print_Buffer(buffer, &buff_Ind);
 			printed_Chars++;
 		} else
@@ -60,7 +60,7 @@ void print_Buffer(char buffer[], int *buff_Ind)
 {
 	if (*buff_Ind > 0)
 	{
-		write(1, buffer, *buffInd);
+		write(1, buffer, *buff_Ind);
 		*buff_Ind = 0;
 	}
 }
